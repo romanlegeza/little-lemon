@@ -1,23 +1,15 @@
 import React from "react";
 import { Box, Flex } from "@chakra-ui/react";
-import Nav from "./Nav";
 import Logo from "./Logo";
+import Nav from "./Nav";
 
 const Header = () => {
     return (
-        <Box backgroundColor="#18181b">
+        <Box>
             <header>
-                <Flex
-                    margin="0 auto"
-                    px={12}
-                    color="white"
-                    justifyContent="center"
-                    alignItems="center"
-                    maxWidth="1024px"
-                    height={56}
-                >
+                <Flex className="App-header">
                     <Logo />
-                    <Nav isHeader={true}/>
+                    <Nav isHeader={true} />
                 </Flex>
             </header>
         </Box>

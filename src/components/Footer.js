@@ -1,29 +1,23 @@
 import React from "react";
 import { Box, Flex } from "@chakra-ui/react";
-import Nav from "./Nav";
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Logo from "./Logo";
+import Nav from "./Nav";
 
 const Footer = () => {
+    const isDesktop = useMediaQuery(theme => theme.breakpoints.up('md'));
     return (
-        <Box backgroundColor="#18181b">
+        <Box>
             <footer>
-                <Flex
-                    margin="0 auto"
-                    px={12}
-                    color="white"
-                    justifyContent="center"
-                    alignItems="center"
-                    maxWidth="1024px"
-                    height={156}
-                >
+                <Flex className="App-footer">
                     <Logo />
-                    <Nav isHeader={false} />
+                    {isDesktop ? <Nav isHeader={false} /> : null}
                     <Box>
                         <h3>Contact</h3>
                         <p>123 Main St City, State 12345</p>
                         <p>123-456-7890</p>
                         <p>
-                            <a href="mailto:" target="_blank" rel="noreferrer">
+                            <a href="mailto:" className="App-link" target="_blank" rel="noreferrer">
                                 email
                             </a>
                         </p>
