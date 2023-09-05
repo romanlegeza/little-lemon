@@ -15,4 +15,5 @@ const Header = () => {
         </Box>
     );
 };
+
 export default Header;

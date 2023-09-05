@@ -4,14 +4,16 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import menuItems from '../constants.js';
 import { Button, Box } from '@mui/material';
-import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const Nav = (props) => {
     const isHeader = props.isHeader || false;
     const [anchorEl, setAnchorEl] = useState(null);
     const isDesktop = useMediaQuery(theme => theme.breakpoints.up('md'));
+
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -21,20 +23,13 @@ const Nav = (props) => {
         setAnchorEl(null);
     };
 
-    const menuItems = {
-        home: 'Home',
-        about: 'About',
-        menu: 'Menu',
-        reservations: 'Reservations',
-        orderOnline: 'Order Online',
-        login: 'Login',
-    }
-
     const DesktopMenu = () => (
         <Box display={isHeader ? "flex" : "block"} gap={2}>
-            {Object.keys(menuItems).map((key, index) => (
-                <Button key={index} onClick={handleClose}>
-                    {menuItems[key]}
+            {menuItems.map((item, index) => (
+                <Button key={index} onClick={handleClick}>
+                    <Link to={item.path} className='App-link' >
+                        {item.label}
+                    </Link>
                 </Button>
             ))}
         </Box>
@@ -42,7 +37,7 @@ const Nav = (props) => {
 
     const MobileMenu = () => (
         <div className='mobile-menu-icon'>
-            <IconButton size='meduim' color='secondary'  onClick={handleClick}>
+            <IconButton size='meduim' color='secondary' onClick={handleClick}>
                 <MenuIcon />
             </IconButton>
             <Menu
@@ -59,9 +54,11 @@ const Nav = (props) => {
                     horizontal: 'center',
                 }}
             >
-                {Object.keys(menuItems).map((key, index) => (
+                {menuItems.map((item, index) => (
                     <MenuItem key={index} onClick={handleClose}>
-                        {menuItems[key]}
+                        <Link to={item.path}>
+                            {item.label}
+                        </Link>
                     </MenuItem>
                 ))}
             </Menu>
