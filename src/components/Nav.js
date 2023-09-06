@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import menuItems from '../constants.js';
+import { navItems } from '../constants';
 import { Button, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -25,9 +25,9 @@ const Nav = (props) => {
 
     const DesktopMenu = () => (
         <Box display={isHeader ? "flex" : "block"} gap={2}>
-            {menuItems.map((item, index) => (
+            {navItems.map((item, index) => (
                 <Button key={index} onClick={handleClick}>
-                    <Link to={item.path} className='App-link' >
+                    <Link to={item.path} className='App-link App-menu-link' >
                         {item.label}
                     </Link>
                 </Button>
@@ -54,9 +54,9 @@ const Nav = (props) => {
                     horizontal: 'center',
                 }}
             >
-                {menuItems.map((item, index) => (
+                {navItems.map((item, index) => (
                     <MenuItem key={index} onClick={handleClose}>
-                        <Link to={item.path}>
+                        <Link to={item.path} className='App-link App-menu-link'>
                             {item.label}
                         </Link>
                     </MenuItem>

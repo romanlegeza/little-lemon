@@ -1,11 +1,13 @@
+import { Grid, ThemeProvider } from '@mui/material';
+import Box from '@mui/material/Box';
+import Item from '@mui/material/Grid';
 import '@mui/material/styles';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
 import Footer from './components/Footer';
-import { ThemeProvider } from '@mui/material';
+import Header from './components/Header';
+import { navItems } from './constants';
 import { appTheme } from './theme';
-import menuItems from './constants';
 
 
 function App() {
@@ -13,11 +15,19 @@ function App() {
     <Router>
       <ThemeProvider theme={appTheme}>
         <Header />
-        <Routes>
-          {menuItems.map((item, index) => {
-            return <Route key={index} path={item.path} element={<item.component />} />;
-          })}
-        </Routes>
+        <Grid container>
+          <Grid item xs={12} md={12}>
+            <Item>
+              <Box display="flex" justifyContent="center" alignItems="center" sx={{ minWidth: 300 }}>
+                <Routes>
+                  {navItems.map((item, index) => {
+                    return <Route key={index} path={item.path} element={<item.component />} />;
+                  })}
+                </Routes>
+              </Box>
+            </Item>
+          </Grid>
+        </Grid>
         <Footer />
       </ThemeProvider>
     </Router>
