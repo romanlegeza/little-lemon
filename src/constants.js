@@ -2,10 +2,11 @@ import bruchetta from "./images/bruchetta.svg";
 import greekSalad from "./images/greek-salad.jpg";
 import lemonDessert from "./images/lemon-dessert.jpg";
 import AboutPage from './pages/AboutPage';
-import BookingPage from './pages/BookingPage';
+import OrderOnlinePage from './pages/OrderOnlinePage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import ReservationsPage from './pages/ReservationsPage';
+import MenuPage from "./pages/MenuPage";
 
 
 const navItems = [
@@ -22,7 +23,7 @@ const navItems = [
     {
         path: '/menu',
         label: 'Menu',
-        component: AboutPage
+        component: MenuPage
     },
     {
         path: '/reservations',
@@ -32,7 +33,7 @@ const navItems = [
     {
         path: '/order-online',
         label: 'Order Online',
-        component: BookingPage
+        component: OrderOnlinePage
     },
     {
         path: '/login',
@@ -45,19 +46,19 @@ const menuItems = [
     {
         image: greekSalad,
         title: 'Greek Salad',
-        price: '$12.99',
+        price: '12.99',
         description: 'The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.',
     },
     {
         image: bruchetta,
         title: 'Bruchetta',
-        price: '$5.99',
+        price: '5.99',
         description: 'Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil.',
     },
     {
         image: lemonDessert,
         title: 'Lemon Dessert',
-        price: '$5.00',
+        price: '5.00',
         description: 'This comes straight from grandma’s recipe book, every last ingredient has been sourced and is as authentic as can be imagined.',
     },
 ];

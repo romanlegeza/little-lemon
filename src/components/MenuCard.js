@@ -27,7 +27,7 @@ const UserTestimonialCard = (props) => {
                                 {item.title}
                             </Typography>
                             <Typography gutterBottom variant="h6" component="div">
-                                {item.price}
+                                ${item.price}
                             </Typography>
                         </Box>
                         <Typography variant="body2" color="text.secondary">
@@ -35,7 +35,7 @@ const UserTestimonialCard = (props) => {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Link to="/menu" className="App-link">
+                        <Link to="/order-online" className="App-link">
                             Order a delivery <DeliveryDining />
                         </Link>
                     </CardActions>
