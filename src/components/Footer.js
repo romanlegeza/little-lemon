@@ -15,17 +15,17 @@ const Footer = () => {
                     <Logo />
                     {isDesktop ? <Nav isHeader={false} /> : null}
                     <Box>
-                        <Typography variant="h6" component="div">
+                        <Typography variant="h6" component="div" color="primary">
                             Contact
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" color="primary">
                             123 Main St City, State 12345
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" color="primary">
                             123-456-7890
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            <Link to="mailto:" className="App-link" target="_blank" rel="noreferrer">
+                        <Typography variant="body2" color="primary">
+                            <Link to="mailto:" className="App-link App-white" target="_blank" rel="noreferrer">
                                 email
                             </Link>
                         </Typography>
