@@ -14,7 +14,7 @@ const OrderOnlinePage = () => {
     return (
         <Container>
             <Box mt={5} mb={5}>
-                <Typography variant="h2" align="center">
+                <Typography variant="h3" align="center">
                     Order Online
                 </Typography>
 
