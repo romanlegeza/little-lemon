@@ -66,7 +66,6 @@ const ReservationsPage = () => {
                                         <MenuItem value="15:00">8:00 PM</MenuItem>
                                         <MenuItem value="15:30">8:30 PM</MenuItem>
                                         <MenuItem value="16:00">9:00 PM</MenuItem>
-                                        <MenuItem value="16:30">9:30 PM</MenuItem>
                                         <MenuItem value="17:00">10:00 PM</MenuItem>
                                     </Select>
                                 </FormControl>
