@@ -108,6 +108,7 @@ const BookingForm = ({ availableTimes, setAvailableTimes, updateTimes }) => {
             </Grid>
             <Button
                 type="submit"
+                data-testid="submit-button"
                 variant="contained"
                 color="primary"
                 sx={{ mt: 3, mb: 2 }}
