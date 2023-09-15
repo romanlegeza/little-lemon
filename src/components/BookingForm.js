@@ -14,12 +14,26 @@ const BookingForm = ({ availableTimes, setAvailableTimes, updateTimes }) => {
     });
     const [selectedTime, setSelectedTime] = useState('');
 
+    // Function to initialize available times based on date
+    const initializeTimes = (date) => {
+        // Logic here to update availableTimes based on the date
+        // Example: if date is a weekend, remove '5:00' and '5:30'
+        const isWeekend = (new Date(date).getDay() === 5 || new Date(date).getDay() === 6);
+        if (isWeekend) {
+            updateTimes({ type: 'REMOVE_TIME', time: '5:00' });
+            updateTimes({ type: 'REMOVE_TIME', time: '5:30' });
+        } else {
+            // Reset to the default times if not a weekend
+            updateTimes({ type: 'RESET_TIMES' });
+        }
+    };
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
     const handleChangeDate = (e) => {
-        setAvailableTimes({ type: 'RESET_TIMES' });
+        initializeTimes(e.target.value);
         handleChange(e);
     }
 
