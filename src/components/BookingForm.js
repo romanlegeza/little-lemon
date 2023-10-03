@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
     TextField, Button, FormControl, InputLabel, Select,
-    MenuItem, Grid
+    MenuItem, Grid, Table, TableBody, TableCell, TableHead, TableRow
 } from '@mui/material';
 
 
@@ -13,6 +13,7 @@ const BookingForm = ({ availableTimes, setAvailableTimes, updateTimes }) => {
         occasion: '',
     });
     const [selectedTime, setSelectedTime] = useState('');
+    const [bookingData, setBookingData] = useState([]);
 
     // const fetchAPI = window.fetchAPI;
     // Mock version of the API functions
@@ -71,6 +72,10 @@ const BookingForm = ({ availableTimes, setAvailableTimes, updateTimes }) => {
         if (response) {
             // Handle successful submission
             console.log("Reservation successfully submitted!");
+
+            // Add the formData to the bookingData array
+            setBookingData(prevData => [...prevData, formData]);
+
             // Optionally, you can reset the form data or navigate the user to another page, etc.
             setFormData({
                 date: '',
@@ -85,83 +90,109 @@ const BookingForm = ({ availableTimes, setAvailableTimes, updateTimes }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        fullWidth
-                        id="date"
-                        name="date"
-                        label="Date"
-                        type="date"
-                        value={formData.date}
-                        onChange={handleChangeDate}
-                        InputLabelProps={{ shrink: true }}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <FormControl fullWidth>
-                        <InputLabel id="time-label">Time</InputLabel>
-                        <Select
-                            labelId="time-label"
-                            label="Time"
-                            id="time"
-                            name="time"
-                            value={formData.time}
-                            onChange={handleChangeTime}
-                        >
-                            {[...new Set([...availableTimes, selectedTime].filter(Boolean).sort())].map((time, index) => (
-                                <MenuItem key={index} value={time}>
-                                    {time} PM
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        fullWidth
-                        id="guests"
-                        name="guests"
-                        label="Number of Guests"
-                        type="number"
-                        value={formData.guests}
-                        onChange={handleChange}
-                        InputLabelProps={{ shrink: true }}
-                        inputProps={{ min: 1, max: 10, step: 1 }}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <FormControl fullWidth>
-                        <InputLabel id="occasion-label">Occasion</InputLabel>
-                        <Select
-                            labelId="occasion-label"
-                            label="Occasion"
-                            id="occasion"
-                            name="occasion"
-                            value={formData.occasion}
+        <div>
+            <form onSubmit={handleSubmit}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            required
+                            fullWidth
+                            id="date"
+                            name="date"
+                            label="Date"
+                            type="date"
+                            value={formData.date}
+                            onChange={handleChangeDate}
+                            InputLabelProps={{ shrink: true }}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <FormControl fullWidth>
+                            <InputLabel id="time-label">Time</InputLabel>
+                            <Select
+                                labelId="time-label"
+                                label="Time"
+                                id="time"
+                                name="time"
+                                value={formData.time}
+                                onChange={handleChangeTime}
+                            >
+                                {[...new Set([...availableTimes, selectedTime].filter(Boolean).sort())].map((time, index) => (
+                                    <MenuItem key={index} value={time}>
+                                        {time} PM
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            required
+                            fullWidth
+                            id="guests"
+                            name="guests"
+                            label="Number of Guests"
+                            type="number"
+                            value={formData.guests}
                             onChange={handleChange}
-                        >
-                            <MenuItem value="birthday">Birthday</MenuItem>
-                            <MenuItem value="anniversary">Anniversary</MenuItem>
-                            <MenuItem value="business">Business</MenuItem>
-                            <MenuItem value="other">Other</MenuItem>
-                        </Select>
-                    </FormControl>
+                            InputLabelProps={{ shrink: true }}
+                            inputProps={{ min: 1, max: 10, step: 1 }}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <FormControl fullWidth>
+                            <InputLabel id="occasion-label">Occasion</InputLabel>
+                            <Select
+                                labelId="occasion-label"
+                                label="Occasion"
+                                id="occasion"
+                                name="occasion"
+                                value={formData.occasion}
+                                onChange={handleChange}
+                            >
+                                <MenuItem value="birthday">Birthday</MenuItem>
+                                <MenuItem value="anniversary">Anniversary</MenuItem>
+                                <MenuItem value="business">Business</MenuItem>
+                                <MenuItem value="other">Other</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Grid>
                 </Grid>
-            </Grid>
-            <Button
-                type="submit"
-                data-testid="submit-button"
-                variant="contained"
-                color="primary"
-                sx={{ mt: 3, mb: 2 }}
-            >
-                Make Your reservation
-            </Button>
-        </form>
+                <Button
+                    type="submit"
+                    data-testid="submit-button"
+                    variant="contained"
+                    color="primary"
+                    sx={{ mt: 3, mb: 2 }}
+                >
+                    Make Your reservation
+                </Button>
+            </form>
+
+            {/* Display the booking data */}
+            {bookingData.length > 0 && (
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Date</TableCell>
+                            <TableCell>Time</TableCell>
+                            <TableCell>Number of Guests</TableCell>
+                            <TableCell>Occasion</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {bookingData.map((booking, index) => (
+                            <TableRow key={index}>
+                                <TableCell>{booking.date}</TableCell>
+                                <TableCell>{booking.time}</TableCell>
+                                <TableCell>{booking.guests}</TableCell>
+                                <TableCell>{booking.occasion}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            )}
+        </div>
     );
 }
 
