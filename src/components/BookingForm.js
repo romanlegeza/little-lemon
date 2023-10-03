@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     TextField, Button, FormControl, InputLabel, Select,
     MenuItem, Grid
@@ -14,26 +14,42 @@ const BookingForm = ({ availableTimes, setAvailableTimes, updateTimes }) => {
     });
     const [selectedTime, setSelectedTime] = useState('');
 
-    // Function to initialize available times based on date
-    const initializeTimes = (date) => {
-        // Logic here to update availableTimes based on the date
-        // Example: if date is a weekend, remove '5:00' and '5:30'
-        const isWeekend = (new Date(date).getDay() === 5 || new Date(date).getDay() === 6);
-        if (isWeekend) {
-            updateTimes({ type: 'REMOVE_TIME', time: '5:00' });
-            updateTimes({ type: 'REMOVE_TIME', time: '5:30' });
-        } else {
-            // Reset to the default times if not a weekend
-            updateTimes({ type: 'RESET_TIMES' });
+    // const fetchAPI = window.fetchAPI;
+    // Mock version of the API functions
+    function fetchAPI(date) {
+        // Return a static array of times for demonstration purposes
+        return ["12:00", "1:00", "2:00", "3:00"];
+    }
+
+    function submitAPI(formData) {
+        // Log the form data and return true for demonstration purposes
+        console.log(formData);
+        return true;
+    }
+
+    useEffect(() => {
+        if (formData.date) {
+            try {
+                const apiTimes = fetchAPI(formData.date);
+
+                // Reset current available times
+                updateTimes({ type: 'RESET_TIMES' });
+
+                // Update the state with the new available times from the API
+                apiTimes.forEach(time => {
+                    updateTimes({ type: 'ADD_TIME', time });
+                });
+            } catch (error) {
+                console.error("Failed to fetch available times:", error);
+            }
         }
-    };
+    }, [formData.date, updateTimes]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
     const handleChangeDate = (e) => {
-        initializeTimes(e.target.value);
         handleChange(e);
     }
 
@@ -50,6 +66,22 @@ const BookingForm = ({ availableTimes, setAvailableTimes, updateTimes }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Reservation Data:", formData);
+
+        const response = submitAPI(formData);
+        if (response) {
+            // Handle successful submission
+            console.log("Reservation successfully submitted!");
+            // Optionally, you can reset the form data or navigate the user to another page, etc.
+            setFormData({
+                date: '',
+                time: '',
+                guests: '',
+                occasion: '',
+            });
+        } else {
+            // Handle failed submission
+            console.error("Failed to submit reservation.");
+        }
     }
 
     return (

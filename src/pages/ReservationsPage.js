@@ -7,7 +7,6 @@ import BookingForm from "../components/BookingForm";
 
 const initialState = [
     '5:00', '5:30', '6:00', '6:30', '7:00', '7:30',
-    '8:00', '8:30', '9:00', '9:30'
 ];
 
 const timeReducer = (state, action) => {
