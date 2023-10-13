@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import ReservationsPage from './pages/ReservationsPage';
 import MenuPage from "./pages/MenuPage";
+import ConfirmedBooking from "./components/ConfirmedBooking";
 
 
 const navItems = [
@@ -39,6 +40,15 @@ const navItems = [
         path: '/login',
         label: 'Login',
         component: LoginPage
+    },
+];
+
+const routes = [
+    ...navItems,
+    {
+        path: '/confirmed-booking',
+        label: 'Confirmed Booking',
+        component: ConfirmedBooking
     },
 ];
 
@@ -95,4 +105,4 @@ const testimonialsItems = [
 ];
 
 
-export { menuItems, navItems, testimonialsItems };
+export { menuItems, navItems, routes, testimonialsItems };

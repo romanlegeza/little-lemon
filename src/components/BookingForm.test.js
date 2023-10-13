@@ -8,13 +8,22 @@ test('renders BookingForm', () => {
         '5:00', '5:30', '6:00', '6:30', '7:00', '7:30',
         '8:00', '8:30', '9:00', '9:30'
     ];
-    const mockSetAvailableTimes = jest.fn();
     const mockUpdateTimes = jest.fn();
+    const mockSubmitForm = jest.fn();
+    const mockSetFormData = jest.fn();
+    const mockFormData = {
+        date: '',
+        time: '',
+        guests: '',
+        occasion: '',
+    };
 
     render(<BookingForm
         availableTimes={mockAvailableTimes}
-        setAvailableTimes={mockSetAvailableTimes}
         updateTimes={mockUpdateTimes}
+        submitForm={mockSubmitForm}
+        formData={mockFormData}
+        setFormData={mockSetFormData}
     />);
 
     const headingElement = screen.getByText(/Make Your reservation/i);
@@ -28,13 +37,22 @@ test('BookingForm component can be submitted by the user', () => {
         '5:00', '5:30', '6:00', '6:30', '7:00', '7:30',
         '8:00', '8:30', '9:00', '9:30'
     ];
-    const mockSetAvailableTimes = jest.fn();
     const mockUpdateTimes = jest.fn();
+    const mockSubmitForm = jest.fn();
+    const mockSetFormData = jest.fn();
+    const mockFormData = {
+        date: '',
+        time: '',
+        guests: '',
+        occasion: '',
+    };
 
     render(<BookingForm
         availableTimes={mockAvailableTimes}
-        setAvailableTimes={mockSetAvailableTimes}
         updateTimes={mockUpdateTimes}
+        submitForm={mockSubmitForm}
+        formData={mockFormData}
+        setFormData={mockSetFormData}
     />);
 
     const submitButton = screen.getByTestId('submit-button');
