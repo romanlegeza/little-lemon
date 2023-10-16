@@ -1,5 +1,7 @@
 # Booking a table on the Little Lemon website
 
+[Figma wireframe](https://www.figma.com/file/gYrfPUKYCbvmhqWyYQWBGi/canvas?type=design&node-id=0%3A1&mode=design&t=A10rYSENhBcZTQk8-1)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
