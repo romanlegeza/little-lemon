@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor, act, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import ReservationsPage from './ReservationsPage';
 import BookingForm from '../components/BookingForm';
 import { BrowserRouter as Router } from 'react-router-dom';

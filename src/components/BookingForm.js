@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { validateBookingForm } from "./BookingFormValidation";
 import './BookingForm.css';
 
 
@@ -27,6 +28,14 @@ const BookingForm = ({ availableTimes, updateTimes, submitForm, formData, setFor
         }
     }, [formData.date, updateTimes]);
 
+    const [formErrors, setFormErrors] = useState({});
+
+    const validateForm = () => {
+        let errors = validateBookingForm(formData);
+        setFormErrors(errors);
+        return Object.keys(errors).length === 0; // return true if no errors
+    };
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
@@ -46,11 +55,13 @@ const BookingForm = ({ availableTimes, updateTimes, submitForm, formData, setFor
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        submitForm(formData);
+        if (validateForm()) {
+            submitForm(formData);
+        }
     }
 
     return (
-        <div className="booking-container">
+        <div className="booking-container" aria-label="Booking Form">
             <form onSubmit={handleSubmit} className="booking-form">
                 <div className="booking-input-group">
                     <label htmlFor="date">Date:</label>
@@ -63,16 +74,20 @@ const BookingForm = ({ availableTimes, updateTimes, submitForm, formData, setFor
                         value={formData.date}
                         onChange={handleChangeDate}
                         className="booking-input"
+                        aria-label="Select Date"
                     />
                     <label htmlFor="time">Time:</label>
                     <select
+                        required
                         id="time"
                         name="time"
                         data-testid="time"
-                        value={formData.time}
+                        value={formData.time || ''}
                         onChange={handleChangeTime}
                         className="booking-input"
+                        aria-label="Select Time"
                     >
+                        <option value="" disabled>Select a time</option>
                         {[...new Set([...availableTimes, selectedTime].filter(Boolean).sort())].map((time, index) => (
                             <option key={index} value={time}>
                                 {time} PM
@@ -98,20 +113,26 @@ const BookingForm = ({ availableTimes, updateTimes, submitForm, formData, setFor
                         id="occasion"
                         name="occasion"
                         data-testid="occasion"
-                        value={formData.occasion}
+                        value={formData.occasion || ''}
                         onChange={handleChange}
                         className="booking-input"
                     >
+                        <option value="" disabled>Select an occasion</option>
                         <option value="birthday">Birthday</option>
                         <option value="anniversary">Anniversary</option>
                         <option value="business">Business</option>
                         <option value="other">Other</option>
                     </select>
                 </div>
+                {formErrors.date && <div className="error">{formErrors.date}</div>}
+                {formErrors.time && <div className="error">{formErrors.time}</div>}
+                {formErrors.guests && <div className="error">{formErrors.guests}</div>}
+                {formErrors.occasion && <div className="error">{formErrors.occasion}</div>}
                 <button
                     type="submit"
                     data-testid="submit-button"
                     className="booking-button"
+                    aria-label="Make Your reservation On Click"
                 >
                     Make Your reservation
                 </button>
