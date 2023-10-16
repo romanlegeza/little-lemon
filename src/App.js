@@ -1,3 +1,8 @@
+import { Grid, ThemeProvider } from '@mui/material';
+import Box from '@mui/material/Box';
+import Item from '@mui/material/Grid';
+import '@mui/material/styles';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import Footer from './components/Footer';
 import Header from './components/Header';
